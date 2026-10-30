@@ -2,35 +2,72 @@
 <html lang="en" class=""><head><script>window.livecodes = window.livecodes || {};</script><title>Untitled Project</title><meta name="title" content="Untitled Project"><meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0"><link rel="stylesheet" href="./style.css"><script src="https://cdn.jsdelivr.net/npm/es-module-shims@1.10.0/dist/es-module-shims.js" async=""></script><script type="importmap">{
   "imports": {}
-}</script></head><body><div id="app">
+}</script></head><body>
+
+
+
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#f6f3eb">
+  <title>Recall. | 政経・公共</title>
+  <link rel="stylesheet" href="style.css">
+
+
+
+<div id="app">
+
   <header class="top">
     <div>
-      <p class="eyebrow">PERSONAL STUDY TOOL</p>
-      <h1>政経 <span>Recall.</span></h1>
-      <p class="subtitle">意味から用語を思い出す、一問一答。</p>
+      <p class="eyebrow">YOUR PERSONAL STUDY SPACE</p>
+      <h1>Recall<span>.</span></h1>
+      <p class="subtitle">政経・公共を、自分のペースで。</p>
     </div>
-    <div class="stats">
-      <div><strong id="total">0</strong><small>登録数</small></div>
-      <div><strong id="mastered">0</strong><small>習得済み</small></div>
-      <div><strong id="weak">0</strong><small>復習</small></div>
-    </div>
+    <div class="header-icon">✿</div>
   </header>
 
   <nav class="tabs">
-    <button class="tab active" data-page="study">学習する</button>
-    <button class="tab" data-page="manage">問題を管理</button>
+    <button class="tab active" data-page="study">学習</button>
+    <button class="tab" data-page="dashboard">学習記録</button>
+    <button class="tab" data-page="manage">問題管理</button>
   </nav>
 
+  <!-- 学習ページ -->
   <section id="studyPage">
+
+    <div class="study-heading">
+      <div>
+        <p class="eyebrow">LET'S STUDY</p>
+        <h2>今日の学習</h2>
+      </div>
+      <span id="todayDate" class="date"></span>
+    </div>
+
+    <div class="mini-stats">
+      <div>
+        <span id="total">0</span>
+        <small>登録数</small>
+      </div>
+      <div>
+        <span id="mastered">0</span>
+        <small>習得済み</small>
+      </div>
+      <div>
+        <span id="weak">0</span>
+        <small>苦手</small>
+      </div>
+    </div>
+
     <div class="filters">
       <select id="category">
-        <option value="すべて">すべての分野</option>
+        <option value="すべて">すべてのカテゴリー</option>
         <option value="政治">政治</option>
         <option value="経済">経済</option>
         <option value="国際">国際</option>
+        <option value="公共">公共</option>
       </select>
+
       <select id="mode">
-        <option value="all">すべて出題</option>
+        <option value="all">すべて学習</option>
         <option value="weak">苦手だけ</option>
         <option value="due">復習対象だけ</option>
       </select>
@@ -38,19 +75,26 @@
 
     <div class="progress-area">
       <div class="progress-label">
-        <span id="counter">1 / 1</span>
-        <span id="progressText">学習中</span>
+        <span id="counter">0 / 0</span>
+        <span id="progressText">READY TO STUDY</span>
       </div>
-      <div class="progress"><div id="progressBar"></div></div>
+      <div class="progress">
+        <div id="progressBar"></div>
+      </div>
     </div>
 
-    <article class="card">
+    <article class="card" id="studyCard">
+
       <div class="card-top">
         <span id="cardCategory" class="badge">政治</span>
         <span id="cardStatus" class="status">未学習</span>
       </div>
+
       <p class="question-label">QUESTION</p>
-      <div id="definition" class="definition">ここに用語の説明が表示されます。</div>
+
+      <div id="definition" class="definition">
+        ここに問題が表示されます。
+      </div>
 
       <div id="answerArea" class="answer-area hidden">
         <div class="answer-line"></div>
@@ -59,35 +103,161 @@
         <p id="extra" class="extra"></p>
       </div>
 
-      <button id="reveal" class="reveal">答えを見る</button>
+      <button id="reveal" class="reveal">
+        答えを見る <span>↓</span>
+      </button>
+
       <div id="judgeArea" class="judge hidden">
-        <button id="unknown" class="judge-btn unsure">まだ曖昧</button>
-        <button id="known" class="judge-btn sure">言えた ✓</button>
+        <button id="unknown" class="judge-btn unsure">
+          <span>△</span>
+          <small>まだ曖昧</small>
+        </button>
+        <button id="known" class="judge-btn sure">
+          <span>✓</span>
+          <small>覚えた！</small>
+        </button>
       </div>
+
+      <p class="swipe-hint">カードをタップ・上下にスワイプして答えを確認</p>
+
     </article>
 
     <div class="controls">
       <button id="prev" class="secondary">← 前へ</button>
-      <button id="shuffle" class="secondary">シャッフル</button>
+      <button id="shuffle" class="secondary">✧ シャッフル</button>
       <button id="next" class="secondary">次へ →</button>
     </div>
-    <p id="emptyMessage" class="empty hidden">この条件に合う問題がありません。分野や出題モードを変更してね。</p>
+
+    <p id="emptyMessage" class="empty hidden">
+      この条件に合う問題がありません。
+    </p>
+
   </section>
 
+  <!-- 学習記録ページ -->
+  <section id="dashboardPage" class="hidden">
+
+    <div class="section-heading">
+      <p class="eyebrow">YOUR PROGRESS</p>
+      <h2>学習記録</h2>
+    </div>
+
+    <div class="overall-card">
+      <p>全体の習得率</p>
+      <div class="overall-number">
+        <strong id="overallRate">0%</strong>
+        <span>MASTERED</span>
+      </div>
+      <div class="progress large-progress">
+        <div id="overallBar"></div>
+      </div>
+      <small id="overallDetail">0 / 0 問習得</small>
+    </div>
+
+    <div class="section-title-row">
+      <h3>カテゴリー別の習得率</h3>
+    </div>
+
+    <div id="categoryRates" class="rate-list"></div>
+
+    <div class="section-title-row">
+      <h3>苦手ランキング</h3>
+      <span class="pink-label">TOP 10</span>
+    </div>
+
+    <div id="weakRanking" class="ranking-list"></div>
+
+    <div class="section-title-row">
+      <h3>復習予定</h3>
+    </div>
+
+    <div class="review-card">
+      <strong id="dueCount">0</strong>
+      <span>今日復習するカード</span>
+    </div>
+
+  </section>
+
+  <!-- 問題管理ページ -->
   <section id="managePage" class="hidden">
-    <h2 class="section-title">問題を追加する</h2>
+
+    <div class="section-heading">
+      <p class="eyebrow">CARD MANAGEMENT</p>
+      <h2>問題を管理する</h2>
+    </div>
+
+    <h3 class="section-title">問題を追加</h3>
+
     <form id="addForm" class="form">
-      <label>意味・説明<textarea id="newDefinition" required="" placeholder="例：中央銀行が市中銀行に資金を供給すること"></textarea></label>
-      <label>用語<input id="newTerm" required="" placeholder="例：公開市場操作"></label>
-      <label>分野<select id="newCategory"><option>政治</option><option>経済</option><option>国際</option></select></label>
-      <label>補足・覚えるポイント<textarea id="newExtra" placeholder="例：買いオペ・売りオペがある"></textarea></label>
-      <button class="reveal" type="submit">＋ 問題を追加</button>
+
+      <label>
+        カテゴリー
+        <select id="newCategory">
+          <option>政治</option>
+          <option>経済</option>
+          <option>国際</option>
+          <option>公共</option>
+        </select>
+      </label>
+
+      <label>
+        問題・意味
+        <textarea id="newDefinition" required="" placeholder="用語の意味や説明を入力"></textarea>
+      </label>
+
+      <label>
+        答え・用語
+        <input id="newTerm" required="" placeholder="用語を入力">
+      </label>
+
+      <label>
+        補足・覚えるポイント
+        <textarea id="newExtra" placeholder="補足を入力（任意）"></textarea>
+      </label>
+
+      <button class="primary-btn" type="submit">
+        ＋ 問題を追加
+      </button>
+
     </form>
 
-    <div class="list-heading">
-      <h2 class="section-title">登録済みの問題</h2>
-      <input id="search" placeholder="用語・説明を検索">
+    <h3 class="section-title">一括登録</h3>
+
+    <div class="bulk-box">
+      <p>
+        1行につき1問入力してください。
+        項目は「カテゴリー｜問題｜答え｜補足」の順番です。
+      </p>
+
+      <div class="format-example">
+        政治｜国会が内閣総理大臣を指名する制度｜議院内閣制｜日本やイギリスで採用
+      </div>
+
+      <textarea id="bulkInput" rows="7" placeholder="政治｜問題の説明｜用語｜補足
+経済｜問題の説明｜用語｜補足
+公共｜問題の説明｜用語｜補足"></textarea>
+
+      <button id="bulkAdd" class="primary-btn">
+        ＋ まとめて登録
+      </button>
+
+      <p id="bulkMessage" class="message"></p>
     </div>
+
+    <div class="section-title-row">
+      <h3>登録済みの問題</h3>
+      <span id="listCount" class="pink-label">0 CARDS</span>
+    </div>
+
+    <input id="search" class="search" placeholder="用語・説明を検索">
+
     <div id="cardList"></div>
+
   </section>
-</div><script src="./script.js"></script></body></html>
+
+</div>
+
+<script src="script.js"></script>
+
+
+<script src="./script.js"></script></body></html>
