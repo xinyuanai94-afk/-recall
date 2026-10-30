@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en" class=""><head><script>window.livecodes = window.livecodes || {};</script><title>Untitled Project</title><meta name="title" content="Untitled Project"><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0"><link rel="stylesheet" href="./style.css"><script src="https://cdn.jsdelivr.net/npm/es-module-shims@1.10.0/dist/es-module-shims.js" async=""></script><script type="importmap">{
+  "imports": {}
+}</script></head><body><div id="app">
+  <header class="top">
+    <div>
+      <p class="eyebrow">PERSONAL STUDY TOOL</p>
+      <h1>政経 <span>Recall.</span></h1>
+      <p class="subtitle">意味から用語を思い出す、一問一答。</p>
+    </div>
+    <div class="stats">
+      <div><strong id="total">0</strong><small>登録数</small></div>
+      <div><strong id="mastered">0</strong><small>習得済み</small></div>
+      <div><strong id="weak">0</strong><small>復習</small></div>
+    </div>
+  </header>
+
+  <nav class="tabs">
+    <button class="tab active" data-page="study">学習する</button>
+    <button class="tab" data-page="manage">問題を管理</button>
+  </nav>
+
+  <section id="studyPage">
+    <div class="filters">
+      <select id="category">
+        <option value="すべて">すべての分野</option>
+        <option value="政治">政治</option>
+        <option value="経済">経済</option>
+        <option value="国際">国際</option>
+      </select>
+      <select id="mode">
+        <option value="all">すべて出題</option>
+        <option value="weak">苦手だけ</option>
+        <option value="due">復習対象だけ</option>
+      </select>
+    </div>
+
+    <div class="progress-area">
+      <div class="progress-label">
+        <span id="counter">1 / 1</span>
+        <span id="progressText">学習中</span>
+      </div>
+      <div class="progress"><div id="progressBar"></div></div>
+    </div>
+
+    <article class="card">
+      <div class="card-top">
+        <span id="cardCategory" class="badge">政治</span>
+        <span id="cardStatus" class="status">未学習</span>
+      </div>
+      <p class="question-label">QUESTION</p>
+      <div id="definition" class="definition">ここに用語の説明が表示されます。</div>
+
+      <div id="answerArea" class="answer-area hidden">
+        <div class="answer-line"></div>
+        <p class="answer-label">ANSWER</p>
+        <h2 id="term"></h2>
+        <p id="extra" class="extra"></p>
+      </div>
+
+      <button id="reveal" class="reveal">答えを見る</button>
+      <div id="judgeArea" class="judge hidden">
+        <button id="unknown" class="judge-btn unsure">まだ曖昧</button>
+        <button id="known" class="judge-btn sure">言えた ✓</button>
+      </div>
+    </article>
+
+    <div class="controls">
+      <button id="prev" class="secondary">← 前へ</button>
+      <button id="shuffle" class="secondary">シャッフル</button>
+      <button id="next" class="secondary">次へ →</button>
+    </div>
+    <p id="emptyMessage" class="empty hidden">この条件に合う問題がありません。分野や出題モードを変更してね。</p>
+  </section>
+
+  <section id="managePage" class="hidden">
+    <h2 class="section-title">問題を追加する</h2>
+    <form id="addForm" class="form">
+      <label>意味・説明<textarea id="newDefinition" required="" placeholder="例：中央銀行が市中銀行に資金を供給すること"></textarea></label>
+      <label>用語<input id="newTerm" required="" placeholder="例：公開市場操作"></label>
+      <label>分野<select id="newCategory"><option>政治</option><option>経済</option><option>国際</option></select></label>
+      <label>補足・覚えるポイント<textarea id="newExtra" placeholder="例：買いオペ・売りオペがある"></textarea></label>
+      <button class="reveal" type="submit">＋ 問題を追加</button>
+    </form>
+
+    <div class="list-heading">
+      <h2 class="section-title">登録済みの問題</h2>
+      <input id="search" placeholder="用語・説明を検索">
+    </div>
+    <div id="cardList"></div>
+  </section>
+</div><script src="./script.js"></script></body></html>
